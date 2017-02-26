@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 这里只需要扫描服务实现类的包：扫描自定义注解 -->
+    <context:component-scan base-package="com.os.minirpc.test.producer.server"/>
+
+    <context:property-placeholder location="classpath:rpc-server.properties"/>
+
+    <bean id="serviceRegistry" class="com.os.minirpc.registry.zookeeper.ZookeeperServiceRegistry">
+        <constructor-arg name="zkAddress" value="${rpc.registry_address}"/>
+    </bean>
+
+    <bean id="rpcServer" class="com.os.minirpc.server.MiniRpcServer">
+        <constructor-arg name="serviceAddress" value="${rpc.service_address}"/>
+        <constructor-arg name="serviceRegistry" ref="serviceRegistry"/>
+    </bean>
+
+</beans>
