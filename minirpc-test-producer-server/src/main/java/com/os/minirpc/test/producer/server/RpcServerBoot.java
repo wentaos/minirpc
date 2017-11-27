@@ -9,7 +9,7 @@ public class RpcServerBoot {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(RpcServerBoot.class);
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {// Test
 		LOGGER.debug(RpcServerBoot.class.getName()+": Start server!");
 		// 加载服务端 Spring 配置
 		new ClassPathXmlApplicationContext("spring-server.xml");
